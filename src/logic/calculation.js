@@ -22,16 +22,15 @@ export default class Calculation {
     }
 
     calculate() {
-        let pattern = null/* @TODO Add regular expression */;
+        let pattern = new RegExp(/(^\d+(\.\d+)?)|(\d+(\.\d+)?$)|([-+/*])/, 'g')
 
         if (this.expression.match(pattern)) {
-            let matches = pattern.exec(this.expression);
+            let matches = this.expression.match(pattern)
 
-            let sign = matches[3];
+            let sign = matches[1];
 
-            /**
-             * @TODO Implement it
-             */
+            this.a = +matches[0]
+            this.b = +matches[2]
 
             let result = false;
 

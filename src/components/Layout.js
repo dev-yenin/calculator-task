@@ -17,26 +17,26 @@ export default class Layout extends React.Component {
          */
     }
 
-    handleChange(event) {
-        // @TODO Implement it
+    handleChange = (event) => {
+        this.setState({ value: event.target.value })
     }
 
-    handleSubmit(event) {
+    handleSubmit = (event) => {
         event.preventDefault();
 
         let calculation = new Calculation(this.state.value);
 
-        let result = null/* @TODO Implement it */;
+        let result = calculation.calculate()
 
         let content = 'Wrong input!';
 
         if (result !== false) {
-            // @TODO Implement it
+            content = this.state.value.replace(/[-+/*]/, (sign) => ` ${sign} `)
+            this.setState({ content: `${content} = ${result}` })
+        } else {
+            this.setState({ content })
         }
 
-        /**
-         * @TODO Implement it
-         */
     }
 
     render() {
@@ -50,12 +50,12 @@ export default class Layout extends React.Component {
                     <div className="row">
                         <form className="col-md-6 col-md-offset-3 text-center" onSubmit={this.handleSubmit}>
                             <input type="text" className="form-control col-md-9" placeholder="expression..."
-                                   /* @TODO Implement it *//>
+                                   onChange={this.handleChange}/>
                             <input className="btn btn-success" type="submit" value="Submit"/>
                         </form>
                     </div>
 
-                    <Paragraph /* @TODO Implement it *//>
+                    <Paragraph content={this.state.content}/>
                 </div>
             </div>
         )
